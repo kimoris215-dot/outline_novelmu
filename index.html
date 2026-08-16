@@ -20,7 +20,7 @@
   <aside class="w-64 bg-[#1E0B4B] text-white flex flex-col justify-between p-5 shrink-0 overflow-y-auto select-none">
     <div class="space-y-6">
       <!-- Logo Branding -->
-      <div class="flex items-center gap-3 px-1 pt-1">
+      <div class="flex items-center gap-3 px-1 pt-1 cursor-pointer" onclick="switchTab('beranda')">
         <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center font-extrabold text-2xl text-[#C3F53C]">
           N
         </div>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <!-- Menu Utama Samping -->
+      <!-- Menu Samping -->
       <nav class="space-y-1.5 text-sm font-semibold">
         <button onclick="switchTab('beranda')" id="btn-beranda" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#C3F53C] text-[#1E0B4B] font-bold shadow-sm transition">
           <span class="material-symbols-outlined">home</span> Beranda
@@ -62,25 +62,26 @@
       </nav>
     </div>
 
+    <!-- Bottom Sidebar -->
     <div class="space-y-4 pt-4 border-t border-purple-900/40">
-      <!-- Banner Maskot Kiri Bawah -->
       <div class="bg-gradient-to-b from-[#3B1580] to-[#260B5B] p-4 rounded-2xl relative text-center text-white border border-purple-500/20">
-        <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/100/6A38E5/FFFFFF?text=Monstero';" class="w-20 mx-auto -mt-10 drop-shadow-md" alt="Monstero">
+        <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/100/6A38E5/FFFFFF?text=Monstero';" class="w-16 mx-auto drop-shadow-md" alt="Monstero">
         <p class="text-xs font-bold leading-tight mt-1 text-[#C3F53C]">Terus menulis, ceritamu luar biasa!</p>
       </div>
 
-      <!-- User Profile -->
-      <div class="flex items-center justify-between">
+      <!-- User Profile Card -->
+      <div class="flex items-center justify-between cursor-pointer" onclick="openProfileModal()">
         <div class="flex items-center gap-3">
-          <div id="user-avatar" class="w-10 h-10 rounded-full bg-purple-600 border-2 border-[#C3F53C] flex items-center justify-center font-bold text-white overflow-hidden">
-            Nazari
+          <div id="user-avatar-container" class="w-10 h-10 rounded-full bg-purple-600 border-2 border-[#C3F53C] flex items-center justify-center font-bold text-white overflow-hidden shrink-0">
+            <span id="user-avatar-text">?</span>
+            <img id="user-avatar-img" src="" class="hidden w-full h-full object-cover" alt="Profile">
           </div>
-          <div class="leading-tight">
-            <p id="user-name-sidebar" class="font-bold text-xs text-white">Nazari</p>
-            <p class="text-[10px] text-purple-300">Penulis • Dreamer</p>
+          <div class="leading-tight overflow-hidden">
+            <p id="user-name-sidebar" class="font-bold text-xs text-white truncate">Belum Ada Nama</p>
+            <p id="user-email-sidebar" class="text-[10px] text-purple-300 truncate">email@domain.com</p>
           </div>
         </div>
-        <button onclick="editProfile()" class="text-xs text-purple-300 hover:text-white">Lihat Profil</button>
+        <span class="material-symbols-outlined text-purple-300 text-sm">edit</span>
       </div>
     </div>
   </aside>
@@ -88,210 +89,261 @@
   <!-- KONTEN UTAMA -->
   <main class="flex-1 overflow-y-auto p-6 space-y-6">
 
-    <!-- TOPBAR SEARCH -->
+    <!-- TOPBAR -->
     <header class="flex justify-between items-center bg-white p-3 px-5 rounded-2xl border border-gray-100 shadow-sm">
       <div class="flex items-center gap-2 w-96 bg-gray-50 px-3 py-2 rounded-xl border border-gray-200/80">
         <span class="material-symbols-outlined text-gray-400 text-lg">search</span>
         <input type="text" placeholder="Cari di Novel Consult..." class="bg-transparent text-xs outline-none w-full text-gray-700">
       </div>
-      <div class="flex items-center gap-4">
-        <button class="relative text-gray-500 hover:text-purple-600">
-          <span class="material-symbols-outlined">notifications</span>
-          <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
-        <img src="monstero.png" class="w-8 h-8 rounded-full border border-purple-200 object-cover" alt="User">
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <p id="user-name-header" class="font-bold text-xs text-gray-900">Penulis</p>
+          <p id="user-email-header" class="text-[10px] text-gray-400">email@domain.com</p>
+        </div>
+        <div onclick="openProfileModal()" class="w-9 h-9 rounded-full bg-purple-100 border border-purple-300 flex items-center justify-center cursor-pointer overflow-hidden">
+          <span id="header-avatar-text" class="font-bold text-purple-700 text-xs">P</span>
+          <img id="header-avatar-img" src="" class="hidden w-full h-full object-cover" alt="User">
+        </div>
       </div>
     </header>
 
-    <!-- DASHBOARD TAB BERANDA -->
+    <!-- TAB BERANDA -->
     <div id="tab-beranda" class="space-y-6">
-      
-      <!-- GRID ATAS: BANNER & RINGKASAN HARI INI -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Banner Utama -->
+        <!-- Banner -->
         <div class="lg:col-span-2 bg-gradient-to-r from-[#EDE7FD] via-[#F4EFFF] to-[#EDE7FD] rounded-3xl p-6 relative flex justify-between items-center border border-purple-100 shadow-sm overflow-hidden">
           <div class="space-y-3 z-10 max-w-md">
-            <h2 class="text-2xl font-extrabold text-gray-900">Halo, <span id="user-greeting">Nazari</span>! 👋</h2>
+            <h2 class="text-2xl font-extrabold text-gray-900">Halo, <span id="user-greeting">Penulis</span>! 👋</h2>
             <p class="text-xs text-gray-600 font-medium">Mari kembangkan ceritamu hari ini.</p>
             <div class="bg-white/90 backdrop-blur p-3.5 rounded-2xl border border-purple-100 text-[11px] font-medium text-purple-900 shadow-sm">
-              "Setiap kata yang kamu tulis adalah langkah menuju novelnya yang luar biasa." 💜
+              "Setiap kata yang kamu tulis adalah langkah menuju novel yang luar biasa." 💜
             </div>
           </div>
-          <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/180/6A38E5/FFFFFF?text=Monstero';" class="w-44 h-44 object-contain shrink-0 z-10" alt="Monstero">
+          <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/180/6A38E5/FFFFFF?text=Monstero';" class="w-40 h-40 object-contain shrink-0" alt="Monstero">
         </div>
 
-        <!-- Widget Ringkasan Hari Ini -->
+        <!-- Widget Ringkasan -->
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
-          <div class="flex justify-between items-center">
-            <h3 class="font-bold text-sm text-gray-900">Ringkasan Hari Ini</h3>
-            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua</a>
-          </div>
-          <div class="grid grid-cols-2 gap-3 my-2">
-            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
-              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">edit</span>
-              <div>
-                <p class="text-base font-extrabold text-gray-900 leading-tight">1.250</p>
-                <p class="text-[10px] text-gray-500 font-medium">Kata ditulis Hari ini</p>
-              </div>
+          <h3 class="font-bold text-sm text-gray-900 mb-2">Ringkasan Hari Ini</h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60">
+              <p id="dash-words-today" class="text-base font-extrabold text-gray-900">0</p>
+              <p class="text-[10px] text-gray-500 font-medium">Kata ditulis Hari Ini</p>
             </div>
-            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
-              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">timer</span>
-              <div>
-                <p class="text-base font-extrabold text-gray-900 leading-tight">45</p>
-                <p class="text-[10px] text-gray-500 font-medium">Menit menulis Fokus</p>
-              </div>
-            </div>
-            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
-              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">menu_book</span>
-              <div>
-                <p class="text-base font-extrabold text-gray-900 leading-tight">4 / 5</p>
-                <p class="text-[10px] text-gray-500 font-medium">Chapter Bulan ini</p>
-              </div>
-            </div>
-            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
-              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">star</span>
-              <div>
-                <p class="text-base font-extrabold text-gray-900 leading-tight">85%</p>
-                <p class="text-[10px] text-gray-500 font-medium">Target Bulan Ini</p>
-              </div>
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60">
+              <p id="dash-focus-time" class="text-base font-extrabold text-gray-900">0 Min</p>
+              <p class="text-[10px] text-gray-500 font-medium">Menit Fokus</p>
             </div>
           </div>
-          <div>
+          <div class="mt-3">
             <div class="flex justify-between text-[11px] font-bold text-gray-600 mb-1">
-              <span>Target Kata Bulan Ini</span>
-              <span>8.500 / 10.000 kata</span>
+              <span>Total Novel Ditulis</span>
+              <span id="dash-total-novels-count">0 Novel</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-2">
-              <div class="bg-gradient-to-r from-purple-600 to-[#C3F53C] h-2 rounded-full" style="width: 85%"></div>
+              <div id="dash-progress-bar" class="bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- GRID TENGAH: NOVEL AKTIF & KONSULTASI -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Novel Aktif Card -->
-        <div class="lg:col-span-2 bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
-          <div class="flex justify-between items-center mb-3">
-            <h3 class="font-bold text-sm text-gray-900">Novel Aktif</h3>
-            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua Novel</a>
-          </div>
-          <div class="flex gap-5 items-center">
-            <div class="w-28 h-36 bg-gray-900 text-white rounded-2xl shadow-md overflow-hidden shrink-0 flex items-center justify-center font-bold text-xs bg-cover bg-center" style="background-image: url('https://via.placeholder.com/150/1E0B4B/FFFFFF?text=MADONA');">
-              MADONA
-            </div>
-            <div class="flex-1 space-y-3">
-              <div>
-                <h4 class="font-extrabold text-xl text-gray-900">Madona</h4>
-                <p class="text-xs text-gray-500 font-medium">Romance • Thriller</p>
-              </div>
-              <div class="text-xs text-gray-600 space-y-1 font-semibold">
-                <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-purple-600">book</span> 12 / 30 Chapter</p>
-                <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-purple-600">edit_note</span> 42.500 / 80.000 kata</p>
-              </div>
-              <div>
-                <div class="w-full bg-gray-100 rounded-full h-2">
-                  <div class="bg-purple-600 h-2 rounded-full" style="width: 40%"></div>
-                </div>
-                <p class="text-right text-[10px] text-gray-400 font-bold mt-1">40%</p>
-              </div>
-            </div>
-            <div class="w-56 bg-purple-50/60 p-4 rounded-2xl border border-purple-100 space-y-2 text-center">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-purple-600">Target Berikutnya</span>
-              <p class="text-xs font-bold text-gray-800">Selesaikan Chapter 13</p>
-              <p class="text-[10px] text-gray-500">Konflik utama dan motif karakter diperjelas.</p>
-              <button class="w-full bg-purple-600 text-white text-xs py-2 rounded-xl font-bold hover:bg-purple-700 transition flex items-center justify-center gap-1">
-                Lanjut Menulis <span class="material-symbols-outlined text-xs">arrow_forward</span>
-              </button>
-            </div>
-          </div>
+      <!-- Novel Aktif Container -->
+      <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-sm text-gray-900">Novel Aktif</h3>
+          <button onclick="switchTab('novelku')" class="text-xs font-bold text-purple-600 hover:underline">Kelola Novel</button>
         </div>
+        <div id="active-novel-card">
+          <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+      </div>
 
-        <!-- Konsultasi Terakhir -->
-        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden">
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="font-bold text-sm text-gray-900">Konsultasi Terakhir</h3>
-            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua</a>
-          </div>
-          <div class="bg-purple-50/40 p-4 rounded-2xl border border-purple-100 space-y-2">
-            <div class="flex justify-between text-xs font-bold text-gray-800">
-              <span>Chapter 12</span>
-              <span class="text-gray-400 font-normal text-[10px]">2 hari lalu</span>
+      <!-- Quick Access -->
+      <div class="space-y-3">
+        <h3 class="font-bold text-sm text-gray-900">Quick Access</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div onclick="switchTab('chapter')" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+            <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">edit</span>
+            <div>
+              <p class="font-bold text-xs text-gray-900">Chapter Manager</p>
+              <p class="text-[10px] text-gray-400">Tulis & kelola bab baru</p>
             </div>
-            <p class="text-xs font-bold text-amber-600 flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">warning</span> Perkuat konflik utama
-            </p>
-            <p class="text-[11px] text-gray-600 leading-snug">Konflik terlalu cepat selesai. Perlu ketegangan dan transisi yang lebih kuat.</p>
-            <div class="flex justify-between items-center pt-2">
-              <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2.5 py-1 rounded-full">Belum direvisi</span>
-              <button class="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1">
-                <span class="material-symbols-outlined text-xs">edit_square</span> Buka Catatan
-              </button>
+          </div>
+          <div onclick="switchTab('planner')" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+            <span class="material-symbols-outlined bg-lime-100 text-lime-700 p-2.5 rounded-xl">account_tree</span>
+            <div>
+              <p class="font-bold text-xs text-gray-900">Story Planner</p>
+              <p class="text-[10px] text-gray-400">Atur alur & plot cerita</p>
+            </div>
+          </div>
+          <div onclick="switchTab('character')" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+            <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">badge</span>
+            <div>
+              <p class="font-bold text-xs text-gray-900">Character Database</p>
+              <p class="text-[10px] text-gray-400">Kelola karakter novel</p>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- GRID BAWAH: QUICK ACCESS, WRITING PROGRESS & KALENDER -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Quick Access -->
-        <div class="lg:col-span-2 space-y-4">
-          <h3 class="font-bold text-sm text-gray-900">Quick Access</h3>
-          <div class="grid grid-cols-3 gap-3">
-            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
-              <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">edit</span>
-              <div>
-                <p class="font-bold text-xs text-gray-900">Tulis Novel</p>
-                <p class="text-[10px] text-gray-400">Mulai menulis chapter baru</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
-              <span class="material-symbols-outlined bg-lime-100 text-lime-700 p-2.5 rounded-xl">account_tree</span>
-              <div>
-                <p class="font-bold text-xs text-gray-900">Story Planner</p>
-                <p class="text-[10px] text-gray-400">Atur alur & plot cerita</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
-              <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">badge</span>
-              <div>
-                <p class="font-bold text-xs text-gray-900">Character Database</p>
-                <p class="text-[10px] text-gray-400">Kelola karakter novel</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Writing Progress Radial Card -->
-        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-between">
-          <div class="relative w-24 h-24 flex items-center justify-center">
-            <svg class="w-full h-full transform -rotate-90">
-              <circle cx="48" cy="48" r="38" stroke="currentColor" stroke-width="8" class="text-gray-100" fill="transparent" />
-              <circle cx="48" cy="48" r="38" stroke="currentColor" stroke-width="8" class="text-purple-600" fill="transparent" stroke-dasharray="238" stroke-dashoffset="138" stroke-linecap="round" />
-            </svg>
-            <span class="absolute font-extrabold text-lg text-gray-900">42%</span>
-          </div>
-          <div class="space-y-1">
-            <p class="text-[11px] text-gray-400 font-bold uppercase">Total Novel</p>
-            <p class="font-bold text-sm text-gray-800">42.500 / 80.000 kata</p>
-            <p class="text-xs text-gray-500">12 / 30 Chapter</p>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- TAB DUMMY LAINNYA -->
-    <div id="tab-novelku" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Daftar Novelku</h2></div>
-    <div id="tab-chapter" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Chapter Manager</h2></div>
-    <div id="tab-planner" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Story Planner</h2></div>
-    <div id="tab-character" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Character Database</h2></div>
-    <div id="tab-konsultasi" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Catatan Konsultasi</h2></div>
-    <div id="tab-ideas" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Idea Vault</h2></div>
-    <div id="tab-progress" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Writing Progress</h2></div>
-    <div id="tab-settings" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Pengaturan</h2></div>
+    <!-- TAB NOVELKU -->
+    <div id="tab-novelku" class="hidden space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="font-extrabold text-xl text-gray-900">Daftar Novelku</h2>
+          <p class="text-xs text-gray-500">Kelola semua proyek cerita dan karya tulisanmu di sini.</p>
+        </div>
+        <button onclick="openNovelModal()" class="bg-[#1E0B4B] text-[#C3F53C] px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-purple-900 transition shadow-sm">
+          <span class="material-symbols-outlined text-sm">add</span> Tambah Novel Baru
+        </button>
+      </div>
+      <div id="novel-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Diisi otomatis oleh JavaScript -->
+      </div>
+    </div>
+
+    <!-- TAB CHARACTER DATABASE -->
+    <div id="tab-character" class="hidden space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="font-extrabold text-xl text-gray-900">Character Database</h2>
+          <p class="text-xs text-gray-500">Simpan profil tokoh, latar belakang, dan peran karakter dalam ceritamu.</p>
+        </div>
+        <button onclick="openCharacterModal()" class="bg-[#1E0B4B] text-[#C3F53C] px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-purple-900 transition shadow-sm">
+          <span class="material-symbols-outlined text-sm">add</span> Tambah Karakter
+        </button>
+      </div>
+      <div id="character-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Diisi otomatis oleh JavaScript -->
+      </div>
+    </div>
+
+    <!-- TAB DUMMY LAIN -->
+    <div id="tab-chapter" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Chapter Manager</h2><p class="text-xs text-gray-500 mt-1">Halaman pengelolaan bab novel.</p></div>
+    <div id="tab-planner" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Story Planner</h2><p class="text-xs text-gray-500 mt-1">Halaman perancangan plot & babak cerita.</p></div>
+    <div id="tab-konsultasi" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Catatan Konsultasi</h2><p class="text-xs text-gray-500 mt-1">Halaman masukan & revisi cerita.</p></div>
+    <div id="tab-ideas" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Idea Vault</h2><p class="text-xs text-gray-500 mt-1">Tempat menyimpan ide liar & percikan cerita.</p></div>
+    <div id="tab-progress" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Writing Progress</h2><p class="text-xs text-gray-500 mt-1">Statistik dan grafik progres menulis harian.</p></div>
+    <div id="tab-settings" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-gray-100"><h2 class="font-bold text-lg">Pengaturan</h2><p class="text-xs text-gray-500 mt-1">Pengaturan aplikasi & tampilan.</p></div>
 
   </main>
+
+  <!-- MODAL EDIT PROFIL -->
+  <div id="modal-profile" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-base text-gray-900">Edit Profil Penulis</h3>
+        <button onclick="closeProfileModal()" class="material-symbols-outlined text-gray-400 hover:text-gray-700">close</button>
+      </div>
+      <div class="space-y-4">
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-20 h-20 rounded-full bg-purple-100 border-2 border-purple-500 flex items-center justify-center overflow-hidden relative group">
+            <span id="modal-avatar-text" class="text-2xl font-bold text-purple-700">?</span>
+            <img id="modal-avatar-preview" src="" class="hidden w-full h-full object-cover" alt="Preview">
+          </div>
+          <label class="cursor-pointer bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-xl hover:bg-purple-100 transition">
+            Pilih Foto Galeri
+            <input type="file" id="input-profile-photo" accept="image/*" class="hidden" onchange="previewImage(this, 'modal-avatar-preview', 'modal-avatar-text')">
+          </label>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pena / Panggilan</label>
+          <input type="text" id="input-profile-name" placeholder="Masukkan nama..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Alamat Email / Gmail</label>
+          <input type="email" id="input-profile-email" placeholder="contoh@gmail.com" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeProfileModal()" class="px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-100 rounded-xl">Batal</button>
+        <button onclick="saveProfile()" class="bg-[#1E0B4B] text-[#C3F53C] px-5 py-2 text-xs font-bold rounded-xl hover:bg-purple-900 transition">Simpan Profil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TAMBAH NOVEL -->
+  <div id="modal-novel" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-base text-gray-900">Tambah Novel Baru</h3>
+        <button onclick="closeNovelModal()" class="material-symbols-outlined text-gray-400 hover:text-gray-700">close</button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Cover Novel (Dari Galeri)</label>
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-20 bg-gray-100 rounded-xl border border-dashed border-gray-300 flex items-center justify-center overflow-hidden">
+              <span id="modal-cover-text" class="text-xs text-gray-400 font-bold">Cover</span>
+              <img id="modal-cover-preview" src="" class="hidden w-full h-full object-cover" alt="Cover Preview">
+            </div>
+            <label class="cursor-pointer bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-xl hover:bg-purple-100 transition">
+              Unggah Gambar
+              <input type="file" id="input-novel-cover" accept="image/*" class="hidden" onchange="previewImage(this, 'modal-cover-preview', 'modal-cover-text')">
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Judul Novel</label>
+          <input type="text" id="input-novel-title" placeholder="Masukkan judul..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Genre</label>
+          <input type="text" id="input-novel-genre" placeholder="contoh: Romance, Fantasy, Thriller" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Sinopsis Ringkas</label>
+          <textarea id="input-novel-synopsis" placeholder="Tuliskan gambaran cerita..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600 h-20 resize-none"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeNovelModal()" class="px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-100 rounded-xl">Batal</button>
+        <button onclick="saveNovel()" class="bg-[#1E0B4B] text-[#C3F53C] px-5 py-2 text-xs font-bold rounded-xl hover:bg-purple-900 transition">Simpan Novel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TAMBAH KARAKTER -->
+  <div id="modal-character" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-base text-gray-900">Tambah Karakter Baru</h3>
+        <button onclick="closeCharacterModal()" class="material-symbols-outlined text-gray-400 hover:text-gray-700">close</button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Foto Karakter (Dari Galeri)</label>
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center overflow-hidden">
+              <span id="modal-char-text" class="text-xs text-gray-400 font-bold">Foto</span>
+              <img id="modal-char-preview" src="" class="hidden w-full h-full object-cover" alt="Foto Preview">
+            </div>
+            <label class="cursor-pointer bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-xl hover:bg-purple-100 transition">
+              Unggah Foto
+              <input type="file" id="input-char-photo" accept="image/*" class="hidden" onchange="previewImage(this, 'modal-char-preview', 'modal-char-text')">
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Nama Karakter</label>
+          <input type="text" id="input-char-name" placeholder="Nama karakter..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Peran Dalam Cerita</label>
+          <input type="text" id="input-char-role" placeholder="contoh: Tokoh Utama (Protagonis), Antagonis" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Sifat & Deskripsi Singkat</label>
+          <textarea id="input-char-desc" placeholder="Tulis kepribadian & latar belakang..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold outline-none focus:border-purple-600 h-20 resize-none"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeCharacterModal()" class="px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-100 rounded-xl">Batal</button>
+        <button onclick="saveCharacter()" class="bg-[#1E0B4B] text-[#C3F53C] px-5 py-2 text-xs font-bold rounded-xl hover:bg-purple-900 transition">Simpan Karakter</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
