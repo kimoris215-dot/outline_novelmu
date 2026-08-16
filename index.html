@@ -8,139 +8,291 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Font & Material Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts & Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   
-  <!-- Link ke File CSS Terpisah -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-brand-greenBg/30 font-sans text-gray-800 flex h-screen overflow-hidden">
+<body class="bg-[#F8F9FD] font-sans text-gray-800 flex h-screen overflow-hidden">
 
   <!-- SIDEBAR NAVIGASI -->
-  <aside class="w-64 bg-brand-sidebarBg text-white flex flex-col justify-between p-4 shrink-0 overflow-y-auto">
-    <div>
-      <div class="flex items-center gap-3 px-2 py-3 mb-4">
-        <div class="bg-brand-purple p-2 rounded-xl text-brand-green flex items-center justify-center shadow-lg">
-          <span class="material-symbols-outlined text-2xl">edit_note</span>
+  <aside class="w-64 bg-[#1E0B4B] text-white flex flex-col justify-between p-5 shrink-0 overflow-y-auto select-none">
+    <div class="space-y-6">
+      <!-- Logo Branding -->
+      <div class="flex items-center gap-3 px-1 pt-1">
+        <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center font-extrabold text-2xl text-[#C3F53C]">
+          N
         </div>
         <div>
-          <h1 class="font-bold text-base tracking-wide leading-tight">NOVEL CONSULT</h1>
-          <p class="text-[11px] text-purple-300">Workspace Pribadiku</p>
+          <h1 class="font-extrabold text-base tracking-wider leading-none">NOVEL CONSULT</h1>
+          <p class="text-[11px] text-purple-300 font-medium mt-0.5">Workspace Pribadiku</p>
         </div>
       </div>
 
-      <!-- Menu Navigasi Samping -->
-      <nav class="space-y-1 text-sm font-medium">
-        <button onclick="switchTab('beranda')" id="btn-beranda" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-green text-gray-900 font-bold shadow-md">
+      <!-- Menu Utama Samping -->
+      <nav class="space-y-1.5 text-sm font-semibold">
+        <button onclick="switchTab('beranda')" id="btn-beranda" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#C3F53C] text-[#1E0B4B] font-bold shadow-sm transition">
           <span class="material-symbols-outlined">home</span> Beranda
         </button>
-        <button onclick="switchTab('novelku')" id="btn-novelku" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-200 hover:bg-white/10 transition">
+        <button onclick="switchTab('novelku')" id="btn-novelku" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
           <span class="material-symbols-outlined">menu_book</span> Novelku
         </button>
-        <button onclick="switchTab('planner')" id="btn-planner" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-200 hover:bg-white/10 transition">
+        <button onclick="switchTab('chapter')" id="btn-chapter" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
+          <span class="material-symbols-outlined">view_list</span> Chapter Manager
+        </button>
+        <button onclick="switchTab('planner')" id="btn-planner" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
           <span class="material-symbols-outlined">account_tree</span> Story Planner
         </button>
-        <button onclick="switchTab('character')" id="btn-character" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-200 hover:bg-white/10 transition">
-          <span class="material-symbols-outlined">badge</span> Character DB
+        <button onclick="switchTab('character')" id="btn-character" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
+          <span class="material-symbols-outlined">badge</span> Character Database
         </button>
-        <button onclick="switchTab('ideas')" id="btn-ideas" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-200 hover:bg-white/10 transition">
+        <button onclick="switchTab('konsultasi')" id="btn-konsultasi" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
+          <span class="material-symbols-outlined">forum</span> Catatan Konsultasi
+        </button>
+        <button onclick="switchTab('ideas')" id="btn-ideas" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
           <span class="material-symbols-outlined">lightbulb</span> Idea Vault
+        </button>
+        <button onclick="switchTab('progress')" id="btn-progress" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
+          <span class="material-symbols-outlined">equalizer</span> Writing Progress
+        </button>
+        <button onclick="switchTab('settings')" id="btn-settings" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-purple-200 hover:bg-white/10 transition">
+          <span class="material-symbols-outlined">settings</span> Pengaturan
         </button>
       </nav>
     </div>
 
-    <!-- Profil Pengguna -->
-    <div class="pt-4 border-t border-purple-900/60 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <div id="user-avatar" class="w-9 h-9 rounded-full bg-brand-purple flex items-center justify-center font-bold text-white border-2 border-brand-green">
-          ?
-        </div>
-        <div class="leading-tight">
-          <p id="user-name-sidebar" class="font-bold text-xs text-white">Belum Ada Profil</p>
-          <p class="text-[10px] text-purple-300">Penulis Novel</p>
-        </div>
+    <div class="space-y-4 pt-4 border-t border-purple-900/40">
+      <!-- Banner Maskot Kiri Bawah -->
+      <div class="bg-gradient-to-b from-[#3B1580] to-[#260B5B] p-4 rounded-2xl relative text-center text-white border border-purple-500/20">
+        <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/100/6A38E5/FFFFFF?text=Monstero';" class="w-20 mx-auto -mt-10 drop-shadow-md" alt="Monstero">
+        <p class="text-xs font-bold leading-tight mt-1 text-[#C3F53C]">Terus menulis, ceritamu luar biasa!</p>
       </div>
-      <button onclick="editProfile()" class="material-symbols-outlined text-purple-300 text-sm hover:text-white">edit</button>
+
+      <!-- User Profile -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="user-avatar" class="w-10 h-10 rounded-full bg-purple-600 border-2 border-[#C3F53C] flex items-center justify-center font-bold text-white overflow-hidden">
+            Nazari
+          </div>
+          <div class="leading-tight">
+            <p id="user-name-sidebar" class="font-bold text-xs text-white">Nazari</p>
+            <p class="text-[10px] text-purple-300">Penulis • Dreamer</p>
+          </div>
+        </div>
+        <button onclick="editProfile()" class="text-xs text-purple-300 hover:text-white">Lihat Profil</button>
+      </div>
     </div>
   </aside>
 
   <!-- KONTEN UTAMA -->
-  <main class="flex-1 overflow-y-auto p-5 space-y-5">
+  <main class="flex-1 overflow-y-auto p-6 space-y-6">
 
-    <!-- TAB BERANDA -->
-    <div id="tab-beranda" class="space-y-5">
-      <section class="bg-gradient-to-r from-purple-100 via-purple-50 to-purple-100 rounded-2xl p-6 relative flex justify-between items-center border border-purple-200/60 shadow-sm">
-        <div class="space-y-2 max-w-md">
-          <h2 class="text-2xl font-bold text-gray-900">Halo, <span id="user-greeting">Penulis</span>! 👋</h2>
-          <p class="text-xs text-gray-600">Mari kembangkan ceritamu hari ini.</p>
-          <div class="bg-white/80 backdrop-blur-sm p-3 rounded-xl border-l-4 border-brand-purple text-[11px] italic text-gray-700">
-            "Setiap kata yang kamu tulis adalah langkah menuju novel yang luar biasa." 💜
+    <!-- TOPBAR SEARCH -->
+    <header class="flex justify-between items-center bg-white p-3 px-5 rounded-2xl border border-gray-100 shadow-sm">
+      <div class="flex items-center gap-2 w-96 bg-gray-50 px-3 py-2 rounded-xl border border-gray-200/80">
+        <span class="material-symbols-outlined text-gray-400 text-lg">search</span>
+        <input type="text" placeholder="Cari di Novel Consult..." class="bg-transparent text-xs outline-none w-full text-gray-700">
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="relative text-gray-500 hover:text-purple-600">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+        <img src="monstero.png" class="w-8 h-8 rounded-full border border-purple-200 object-cover" alt="User">
+      </div>
+    </header>
+
+    <!-- DASHBOARD TAB BERANDA -->
+    <div id="tab-beranda" class="space-y-6">
+      
+      <!-- GRID ATAS: BANNER & RINGKASAN HARI INI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Banner Utama -->
+        <div class="lg:col-span-2 bg-gradient-to-r from-[#EDE7FD] via-[#F4EFFF] to-[#EDE7FD] rounded-3xl p-6 relative flex justify-between items-center border border-purple-100 shadow-sm overflow-hidden">
+          <div class="space-y-3 z-10 max-w-md">
+            <h2 class="text-2xl font-extrabold text-gray-900">Halo, <span id="user-greeting">Nazari</span>! 👋</h2>
+            <p class="text-xs text-gray-600 font-medium">Mari kembangkan ceritamu hari ini.</p>
+            <div class="bg-white/90 backdrop-blur p-3.5 rounded-2xl border border-purple-100 text-[11px] font-medium text-purple-900 shadow-sm">
+              "Setiap kata yang kamu tulis adalah langkah menuju novelnya yang luar biasa." 💜
+            </div>
           </div>
-        </div>
-        
-        <!-- Wadah Gambar Maskot Monstero -->
-        <div class="w-36 h-36 flex items-center justify-center overflow-hidden">
-          <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/150/6A38E5/FFFFFF?text=Monstero';" alt="Monstero" class="object-contain h-full">
-        </div>
-      </section>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div class="lg:col-span-2 space-y-5">
-          <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-            <h3 class="font-bold text-sm text-gray-900 mb-3">Novel Aktif</h3>
-            <div id="active-novel-container"></div>
-          </div>
+          <img src="monstero.png" onerror="this.onerror=null; this.src='https://via.placeholder.com/180/6A38E5/FFFFFF?text=Monstero';" class="w-44 h-44 object-contain shrink-0 z-10" alt="Monstero">
         </div>
 
-        <div class="space-y-5">
-          <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 space-y-3">
+        <!-- Widget Ringkasan Hari Ini -->
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div class="flex justify-between items-center">
             <h3 class="font-bold text-sm text-gray-900">Ringkasan Hari Ini</h3>
-            <div class="grid grid-cols-2 gap-2.5">
-              <div class="p-3 bg-purple-50/50 rounded-xl border border-purple-100 text-center">
-                <p class="text-base font-bold text-brand-purple">0</p>
-                <p class="text-[10px] text-gray-500">Kata Ditulis</p>
+            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua</a>
+          </div>
+          <div class="grid grid-cols-2 gap-3 my-2">
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
+              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">edit</span>
+              <div>
+                <p class="text-base font-extrabold text-gray-900 leading-tight">1.250</p>
+                <p class="text-[10px] text-gray-500 font-medium">Kata ditulis Hari ini</p>
               </div>
-              <div class="p-3 bg-purple-50/50 rounded-xl border border-purple-100 text-center">
-                <p class="text-base font-bold text-brand-purple">0 Min</p>
-                <p class="text-[10px] text-gray-500">Waktu Fokus</p>
+            </div>
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
+              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">timer</span>
+              <div>
+                <p class="text-base font-extrabold text-gray-900 leading-tight">45</p>
+                <p class="text-[10px] text-gray-500 font-medium">Menit menulis Fokus</p>
               </div>
+            </div>
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
+              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">menu_book</span>
+              <div>
+                <p class="text-base font-extrabold text-gray-900 leading-tight">4 / 5</p>
+                <p class="text-[10px] text-gray-500 font-medium">Chapter Bulan ini</p>
+              </div>
+            </div>
+            <div class="p-3 bg-purple-50/50 rounded-2xl border border-purple-100/60 flex items-center gap-3">
+              <span class="material-symbols-outlined text-purple-600 bg-purple-100 p-2 rounded-xl text-lg">star</span>
+              <div>
+                <p class="text-base font-extrabold text-gray-900 leading-tight">85%</p>
+                <p class="text-[10px] text-gray-500 font-medium">Target Bulan Ini</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] font-bold text-gray-600 mb-1">
+              <span>Target Kata Bulan Ini</span>
+              <span>8.500 / 10.000 kata</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-2">
+              <div class="bg-gradient-to-r from-purple-600 to-[#C3F53C] h-2 rounded-full" style="width: 85%"></div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- GRID TENGAH: NOVEL AKTIF & KONSULTASI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Novel Aktif Card -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-sm text-gray-900">Novel Aktif</h3>
+            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua Novel</a>
+          </div>
+          <div class="flex gap-5 items-center">
+            <div class="w-28 h-36 bg-gray-900 text-white rounded-2xl shadow-md overflow-hidden shrink-0 flex items-center justify-center font-bold text-xs bg-cover bg-center" style="background-image: url('https://via.placeholder.com/150/1E0B4B/FFFFFF?text=MADONA');">
+              MADONA
+            </div>
+            <div class="flex-1 space-y-3">
+              <div>
+                <h4 class="font-extrabold text-xl text-gray-900">Madona</h4>
+                <p class="text-xs text-gray-500 font-medium">Romance • Thriller</p>
+              </div>
+              <div class="text-xs text-gray-600 space-y-1 font-semibold">
+                <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-purple-600">book</span> 12 / 30 Chapter</p>
+                <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-purple-600">edit_note</span> 42.500 / 80.000 kata</p>
+              </div>
+              <div>
+                <div class="w-full bg-gray-100 rounded-full h-2">
+                  <div class="bg-purple-600 h-2 rounded-full" style="width: 40%"></div>
+                </div>
+                <p class="text-right text-[10px] text-gray-400 font-bold mt-1">40%</p>
+              </div>
+            </div>
+            <div class="w-56 bg-purple-50/60 p-4 rounded-2xl border border-purple-100 space-y-2 text-center">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-purple-600">Target Berikutnya</span>
+              <p class="text-xs font-bold text-gray-800">Selesaikan Chapter 13</p>
+              <p class="text-[10px] text-gray-500">Konflik utama dan motif karakter diperjelas.</p>
+              <button class="w-full bg-purple-600 text-white text-xs py-2 rounded-xl font-bold hover:bg-purple-700 transition flex items-center justify-center gap-1">
+                Lanjut Menulis <span class="material-symbols-outlined text-xs">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Konsultasi Terakhir -->
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="font-bold text-sm text-gray-900">Konsultasi Terakhir</h3>
+            <a href="#" class="text-[11px] font-bold text-purple-600 hover:underline">Lihat Semua</a>
+          </div>
+          <div class="bg-purple-50/40 p-4 rounded-2xl border border-purple-100 space-y-2">
+            <div class="flex justify-between text-xs font-bold text-gray-800">
+              <span>Chapter 12</span>
+              <span class="text-gray-400 font-normal text-[10px]">2 hari lalu</span>
+            </div>
+            <p class="text-xs font-bold text-amber-600 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">warning</span> Perkuat konflik utama
+            </p>
+            <p class="text-[11px] text-gray-600 leading-snug">Konflik terlalu cepat selesai. Perlu ketegangan dan transisi yang lebih kuat.</p>
+            <div class="flex justify-between items-center pt-2">
+              <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2.5 py-1 rounded-full">Belum direvisi</span>
+              <button class="text-xs font-bold text-purple-600 hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">edit_square</span> Buka Catatan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID BAWAH: QUICK ACCESS, WRITING PROGRESS & KALENDER -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Quick Access -->
+        <div class="lg:col-span-2 space-y-4">
+          <h3 class="font-bold text-sm text-gray-900">Quick Access</h3>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+              <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">edit</span>
+              <div>
+                <p class="font-bold text-xs text-gray-900">Tulis Novel</p>
+                <p class="text-[10px] text-gray-400">Mulai menulis chapter baru</p>
+              </div>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+              <span class="material-symbols-outlined bg-lime-100 text-lime-700 p-2.5 rounded-xl">account_tree</span>
+              <div>
+                <p class="font-bold text-xs text-gray-900">Story Planner</p>
+                <p class="text-[10px] text-gray-400">Atur alur & plot cerita</p>
+              </div>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3 cursor-pointer hover:border-purple-300 transition">
+              <span class="material-symbols-outlined bg-purple-100 text-purple-600 p-2.5 rounded-xl">badge</span>
+              <div>
+                <p class="font-bold text-xs text-gray-900">Character Database</p>
+                <p class="text-[10px] text-gray-400">Kelola karakter novel</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Writing Progress Radial Card -->
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-between">
+          <div class="relative w-24 h-24 flex items-center justify-center">
+            <svg class="w-full h-full transform -rotate-90">
+              <circle cx="48" cy="48" r="38" stroke="currentColor" stroke-width="8" class="text-gray-100" fill="transparent" />
+              <circle cx="48" cy="48" r="38" stroke="currentColor" stroke-width="8" class="text-purple-600" fill="transparent" stroke-dasharray="238" stroke-dashoffset="138" stroke-linecap="round" />
+            </svg>
+            <span class="absolute font-extrabold text-lg text-gray-900">42%</span>
+          </div>
+          <div class="space-y-1">
+            <p class="text-[11px] text-gray-400 font-bold uppercase">Total Novel</p>
+            <p class="font-bold text-sm text-gray-800">42.500 / 80.000 kata</p>
+            <p class="text-xs text-gray-500">12 / 30 Chapter</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- TAB NOVELKU -->
-    <div id="tab-novelku" class="hidden bg-white p-6 rounded-2xl shadow-sm">
-      <h2 class="text-xl font-bold mb-4">Daftar Novelku</h2>
-      <button onclick="createNewNovel()" class="bg-brand-purple text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-brand-purpleDark transition mb-4">
-        + Tambah Novel Baru
-      </button>
-      <div id="novel-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-    </div>
-
-    <!-- TAB STORY PLANNER -->
-    <div id="tab-planner" class="hidden bg-white p-6 rounded-2xl shadow-sm">
-      <h2 class="text-xl font-bold mb-2">Story Planner</h2>
-      <p class="text-xs text-gray-500">Rancang alur cerita, struktur babak (Act 1-3), dan plot twist novelmu di sini.</p>
-    </div>
-
-    <!-- TAB CHARACTER DB -->
-    <div id="tab-character" class="hidden bg-white p-6 rounded-2xl shadow-sm">
-      <h2 class="text-xl font-bold mb-2">Character Database</h2>
-      <p class="text-xs text-gray-500">Kelola profil, sifat, serta hubungan antar tokoh dalam ceritamu.</p>
-    </div>
-
-    <!-- TAB IDEA VAULT -->
-    <div id="tab-ideas" class="hidden bg-white p-6 rounded-2xl shadow-sm">
-      <h2 class="text-xl font-bold mb-2">Idea Vault</h2>
-      <p class="text-xs text-gray-500">Simpan cuplikan ide dialog, konflik mendadak, atau adegan menarik.</p>
-    </div>
+    <!-- TAB DUMMY LAINNYA -->
+    <div id="tab-novelku" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Daftar Novelku</h2></div>
+    <div id="tab-chapter" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Chapter Manager</h2></div>
+    <div id="tab-planner" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Story Planner</h2></div>
+    <div id="tab-character" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Character Database</h2></div>
+    <div id="tab-konsultasi" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Catatan Konsultasi</h2></div>
+    <div id="tab-ideas" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Idea Vault</h2></div>
+    <div id="tab-progress" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Writing Progress</h2></div>
+    <div id="tab-settings" class="hidden bg-white p-6 rounded-3xl shadow-sm"><h2 class="font-bold text-lg">Pengaturan</h2></div>
 
   </main>
 
-  <!-- Link ke File JavaScript Terpisah -->
   <script src="script.js"></script>
 </body>
 </html>
