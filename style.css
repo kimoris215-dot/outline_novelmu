@@ -1,0 +1,58 @@
+/* Konfigurasi Palet Warna Kustom Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Konfigurasi Variabel Warna Aplikasi */
+:root {
+  --brand-purple: #6A38E5;
+  --brand-purple-dark: #4B1DBA;
+  --brand-purple-light: #8B4DFF;
+  --brand-green: #B7F235;
+  --brand-green-dark: #64D14D;
+  --brand-green-bg: #E6F7BF;
+  --brand-sidebar-bg: #1A0938;
+}
+
+/* Kustomisasi Tailwind Script Injection */
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            purple: '#6A38E5',
+            purpleDark: '#4B1DBA',
+            purpleLight: '#8B4DFF',
+            green: '#B7F235',
+            greenDark: '#64D14D',
+            greenBg: '#E6F7BF',
+            sidebarBg: '#1A0938'
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+
+/* Scrollbar halus untuk sidebar dan main content */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(106, 56, 229, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(106, 56, 229, 0.4);
+}
